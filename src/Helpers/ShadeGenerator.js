@@ -4,7 +4,7 @@ const levels = ["lighter", "light", "normal", "dark", "darker"];
 
 function createPalette(initialPalette){
     let newPalette = {
-        name: initialPalette.paletteName,
+        paletteName: initialPalette.paletteName,
         id: initialPalette.id,
         emoji: initialPalette.emoji,
         colors: {}
@@ -14,13 +14,13 @@ function createPalette(initialPalette){
     }
 
     for(let color of initialPalette.colors){
-        let scale = getScale(color.color, 5)
+        let scale = getScale(color.color, 5).reverse()
         for(let i in scale){
             newPalette.colors[levels[i]].push({
                 name: `${color.name} ${levels[i]}`,
                 id: color.name.toLowerCase().replace(/ /g, "-"),
                 hex: scale[i],
-                rgba: chroma(scale[i]).css()
+                rgb: chroma(scale[i]).css()
             })
         }
     }
@@ -30,12 +30,11 @@ function createPalette(initialPalette){
 }
 
 function getRange(color){
-    const end = "#fff";
     
     return [
-        chroma(color).darken(1.4).hex(),
+        chroma(color).darken(1.2).hex(),
         color,
-        end
+        chroma(color).brighten(1.6).hex()
     ]
 }
 
