@@ -3,7 +3,7 @@ import ColorBox from './ColorBox'
 import "../CSS/Palette.css"
 
 function Palette({ colors, emoji, id, paletteName }) {
-    const ColorBoxes = colors.map(color => (<ColorBox background={color.color} name={color.name}/>))
+    const ColorBoxes = colors.map(color => (<ColorBox key={color.name} background={color.color} name={color.name}/>))
   return (
     <div className='Palette'>
         <div className="color-boxes">{ColorBoxes}</div>
