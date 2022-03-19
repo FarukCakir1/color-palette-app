@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import "../CSS/NavBar.css"
-import { Select, MenuItem, Snackbar, IconButton, Alert } from '@mui/material';
+import { Select, MenuItem, Snackbar, Alert } from '@mui/material';
 
 
 
 
-function NavBar({ title, emoji, setTone, setMode, mode }) {
+function NavBar({ paletteName, emoji, setTone, setMode, mode, tone }) {
 
     const [open, setOpen] = useState(false);
 
@@ -27,20 +27,29 @@ function NavBar({ title, emoji, setTone, setMode, mode }) {
 
     return (
         <div className='NavBar'>
-            <div className="title">
-                <span>{title}</span>
-                <span className='emoji'>{emoji}</span>
-            </div>
-            <div className="btn-groups">
-                <button onClick={handleTone} value={"darker"}>Darker</button>
-                <button onClick={handleTone} value={"dark"}>Dark</button>
-                <button onClick={handleTone} value={"normal"}>Normal</button>
-                <button onClick={handleTone} value={"light"}>Light</button>
-                <button onClick={handleTone} value={"lighter"}>Lighter</button>
+            <div className="left-side">
+                <div className="title">
+                    <h3>Color Palettes</h3>
+                </div>
+                <div className="btn-groups">
+                    <Select
+                        size='big'
+                        sx={{width: 200, height: 35, marginLeft: 5}}
+                        value={tone}
+                        onChange={handleTone}
+                    >
+                        <MenuItem value={"darker"}>Darker</MenuItem>
+                        <MenuItem value={"dark"}>Dark</MenuItem>
+                        <MenuItem value={"normal"}>Normal</MenuItem>
+                        <MenuItem value={"light"}>Light</MenuItem>
+                        <MenuItem value={"lighter"}>Lighter</MenuItem>
+                    </Select>
+                </div>
             </div>
             <div className="mode-btns">
                 <Select
-                    size='small'
+                    sx={{width: 200, height: 35}}
+                    size="small"
                     id='select-mode'
                     value={mode}
                     onChange={handleMode}
@@ -50,7 +59,7 @@ function NavBar({ title, emoji, setTone, setMode, mode }) {
                 </Select>
             </div>
             <Snackbar open={open} autoHideDuration={2500} onClose={handleClose}>
-                <Alert onClose={handleClose} severity={'info'} sx={{width: "100%"}}>
+                <Alert onClose={handleClose} severity={'info'} sx={{ width: "100%" }}>
                     Mode changed to {mode}
                 </Alert>
             </Snackbar>

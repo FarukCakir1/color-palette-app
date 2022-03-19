@@ -14,8 +14,12 @@ function Palette({palette}) {
       />))
   return (
     <div className='Palette'>
-        <NavBar title={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode} mode={mode}/>
+        <NavBar paletteName={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode} mode={mode} tone={tone}/>
         <div className="color-boxes">{ColorBoxes}</div>
+        <footer id='footer'> 
+          {palette.paletteName}
+          <span>{palette.emoji}</span>
+        </footer>
     </div>
   )
 }
