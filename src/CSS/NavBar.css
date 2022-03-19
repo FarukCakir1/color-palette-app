@@ -31,8 +31,8 @@
     margin: 0 1.5rem;
 }
 
-#mode{
-    width: 8rem;
-    outline: none;
-    padding: 0 auto;
+#select-mode{
+    width: 5rem;
+    height: 20px;
+    
 }

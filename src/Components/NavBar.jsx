@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../CSS/NavBar.css"
+import { Select, MenuItem, Snackbar, IconButton, Alert } from '@mui/material';
 
-function NavBar({ title, emoji, setTone, setMode }) {
+
+
+
+function NavBar({ title, emoji, setTone, setMode, mode }) {
+
+    const [open, setOpen] = useState(false);
 
     const handleTone = (e) => {
         setTone(e.target.value)
@@ -9,6 +15,14 @@ function NavBar({ title, emoji, setTone, setMode }) {
 
     const handleMode = (e) => {
         setMode(e.target.value)
+    }
+
+    const handleClose = (e) => {
+        setOpen(false)
+    }
+
+    const handleOpen = (e) => {
+        setOpen(true)
     }
 
     return (
@@ -25,12 +39,21 @@ function NavBar({ title, emoji, setTone, setMode }) {
                 <button onClick={handleTone} value={"lighter"}>Lighter</button>
             </div>
             <div className="mode-btns">
-                
-                <select id="mode" onChange={handleMode}>
-                    <option value="hex">HEX</option>
-                    <option value="rgb">RGB</option>
-                </select>
+                <Select
+                    size='small'
+                    id='select-mode'
+                    value={mode}
+                    onChange={handleMode}
+                >
+                    <MenuItem onClick={handleOpen} value={"hex"}>hex(#a3cb38)</MenuItem>
+                    <MenuItem onClick={handleOpen} value={"rgb"}>rgb(18,137,167)</MenuItem>
+                </Select>
             </div>
+            <Snackbar open={open} autoHideDuration={2500} onClose={handleClose}>
+                <Alert onClose={handleClose} severity={'info'} sx={{width: "100%"}}>
+                    Mode changed to {mode}
+                </Alert>
+            </Snackbar>
         </div>
     )
 }

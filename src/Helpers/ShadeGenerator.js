@@ -32,9 +32,9 @@ function createPalette(initialPalette){
 function getRange(color){
     
     return [
-        chroma(color).darken(1.2).hex(),
+        chroma(color).darken(1.8).hex(),
         color,
-        chroma(color).brighten(1.6).hex()
+        chroma(color).brighten(1.3).hex()
     ]
 }
 

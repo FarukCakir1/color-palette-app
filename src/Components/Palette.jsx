@@ -4,7 +4,7 @@ import "../CSS/Palette.css"
 import NavBar from './NavBar'
 
 function Palette({palette}) {
-    const [tone, setTone] = useState("darker")
+    const [tone, setTone] = useState("normal")
     const [mode, setMode] = useState("rgb")
     const ColorBoxes = palette.colors[tone].map(color => 
       (<ColorBox 
@@ -14,7 +14,7 @@ function Palette({palette}) {
       />))
   return (
     <div className='Palette'>
-        <NavBar title={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode}/>
+        <NavBar title={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode} mode={mode}/>
         <div className="color-boxes">{ColorBoxes}</div>
     </div>
   )
