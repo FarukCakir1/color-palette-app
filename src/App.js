@@ -1,15 +1,18 @@
+// Components
 import Palette from "./Components/Palette";
-import seedColors from "./seedColors";
-import { createPalette } from "./Helpers/ShadeGenerator";
+// Packages
+import { Routes, Route} from "react-router-dom"
 
 
 function App() {
-  console.log(createPalette(seedColors[2]));
+
   return (
-    <div className="App">
-      <Palette palette = {createPalette(seedColors[2])}/>
-    </div>
+    <Routes>
+      <Route path="/" element={<h1>Hi</h1>}/>
+      <Route path="/palette/:id" element={<Palette />}/>
+    </Routes>
   );
+
 }
 
 export default App;
