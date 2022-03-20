@@ -4,6 +4,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     
 }
 
@@ -15,12 +18,14 @@
 }
 
 .title{
-    width: 25%;
-  height: 100%;
+  width: 25%;
+  height: 5vh;
   background-color: #2c2c2c;
   color: white;
-  padding-bottom: .5rem;
-  padding-left: .5rem;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .emoji{

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "../CSS/NavBar.css"
 import { Select, MenuItem, Snackbar, Alert } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 
 
@@ -28,13 +29,13 @@ function NavBar({ paletteName, emoji, setTone, setMode, mode, tone }) {
     return (
         <div className='NavBar'>
             <div className="left-side">
-                <div className="title">
-                    <h3>Color Palettes</h3>
-                </div>
+                <Link className='title' to="/">
+                        <h3>Color Palettes</h3>
+                </Link>
                 <div className="btn-groups">
                     <Select
                         size='big'
-                        sx={{width: 200, height: 35, marginLeft: 5}}
+                        sx={{ width: 200, height: 35, marginLeft: 5 }}
                         value={tone}
                         onChange={handleTone}
                     >
@@ -48,7 +49,7 @@ function NavBar({ paletteName, emoji, setTone, setMode, mode, tone }) {
             </div>
             <div className="mode-btns">
                 <Select
-                    sx={{width: 200, height: 35}}
+                    sx={{ width: 200, height: 35 }}
                     size="small"
                     id='select-mode'
                     value={mode}

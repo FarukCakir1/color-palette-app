@@ -6,7 +6,7 @@ import NavBar from './NavBar'
 import "../CSS/Palette.css"
 // Packages
 import { useParams } from "react-router-dom"
-// Helpers
+// Helpers"
 import seedColors from '../seedColors'
 import { createPalette } from "../Helpers/ShadeGenerator";
 
