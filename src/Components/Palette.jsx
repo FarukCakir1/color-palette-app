@@ -20,6 +20,8 @@ function Palette() {
         key={color.name} 
         colorValue={mode === "hex" ? color.hex : color.rgb} 
         name={color.name}
+        moreURL={`/palette/${id}/${color.id}`}
+        displayMore={true}
       />))
   return (
     <div className='Palette'>

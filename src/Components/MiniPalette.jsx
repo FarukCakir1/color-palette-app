@@ -12,7 +12,8 @@ const styles = {
         borderRadius: "5px",
         padding: ".5rem",
         height: "100%",
-        marginTop: "1rem"
+        marginTop: "1rem",
+        cursor: "pointer"
     },
     boxes: {
         width: "100%",

@@ -55,6 +55,8 @@
     height: 25px;
     line-height: 25px;
     text-align: center;
+    text-decoration: none;
+    color: black;
 }
 
 .overlay {
