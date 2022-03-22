@@ -17,8 +17,8 @@ function ColorBox({ colorValue, name, moreURL, displayMore }) {
       <div style={{ background: colorValue }} className='ColorBox'>
         <div style={{ background: colorValue }} className={`overlay ${coppied && "display"}`} />
         <div className={`message ${coppied && "display"}`}>
-          <h1>Copied!</h1>
-          <p>{colorValue}</p>
+          <h1 className={`${checkDarkness && "light-text" } ${checkLightness && "dark-text"}`}>Copied!</h1>
+          <p className={`${checkDarkness && "light-text" } ${checkLightness && "dark-text"}`}>{colorValue}</p>
         </div>
         <div className="container">
           <div className="content">
