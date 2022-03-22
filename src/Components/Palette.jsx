@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom"
 // Helpers"
 import seedColors from '../seedColors'
 import { createPalette } from "../Helpers/ShadeGenerator";
+import Footer from './Footer'
 
 function Palette() {
     const { id } = useParams()
@@ -25,12 +26,9 @@ function Palette() {
       />))
   return (
     <div className='Palette'>
-        <NavBar paletteName={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode} mode={mode} tone={tone}/>
+        <NavBar paletteName={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode} mode={mode} tone={tone} displayTone={true}/>
         <div className="color-boxes">{ColorBoxes}</div>
-        <footer id='footer'> 
-          {palette.paletteName}
-          <span>{palette.emoji}</span>
-        </footer>
+        <Footer palette={palette} />
     </div>
   )
 }

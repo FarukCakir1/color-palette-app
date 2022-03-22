@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import "../CSS/ColorBox.css"
 import { CopyToClipboard } from "react-copy-to-clipboard"
+import chroma from "chroma-js"
 import { Link } from "react-router-dom"
 
 function ColorBox({ colorValue, name, moreURL, displayMore }) {
   const [coppied, setCoppied] = useState(false)
 
-
+  const checkDarkness = chroma(colorValue).luminance() <= 0.08;
+  const checkLightness = chroma(colorValue).luminance() >= 0.6;
   return (
     <CopyToClipboard text={colorValue} onCopy={() => {
       setCoppied(true)
@@ -20,13 +22,13 @@ function ColorBox({ colorValue, name, moreURL, displayMore }) {
         </div>
         <div className="container">
           <div className="content">
-            <span>{name}</span>
+            <span className={checkDarkness && "light-text"}>{name}</span>
           </div>
           <button className='copy-btn'>COPY</button>
         </div>
         {displayMore && (
           <Link to={moreURL} onClick={e => e.stopPropagation()}>
-            <span className='more-btn'>MORE</span>
+            <span className={`more-btn ${checkLightness && "dark-text"}`}>MORE</span>
           </Link>
         )}
 

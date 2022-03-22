@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 
 
-function NavBar({ paletteName, emoji, setTone, setMode, mode, tone }) {
+function NavBar({ paletteName, emoji, setTone, setMode, mode, tone, displayTone }) {
 
     const [open, setOpen] = useState(false);
 
@@ -30,22 +30,24 @@ function NavBar({ paletteName, emoji, setTone, setMode, mode, tone }) {
         <div className='NavBar'>
             <div className="left-side">
                 <Link className='title' to="/">
-                        <h3>Color Palettes</h3>
+                    <h3>Color Palettes</h3>
                 </Link>
-                <div className="btn-groups">
-                    <Select
-                        size='big'
-                        sx={{ width: 200, height: 35, marginLeft: 5 }}
-                        value={tone}
-                        onChange={handleTone}
-                    >
-                        <MenuItem value={"darker"}>Darker</MenuItem>
-                        <MenuItem value={"dark"}>Dark</MenuItem>
-                        <MenuItem value={"normal"}>Normal</MenuItem>
-                        <MenuItem value={"light"}>Light</MenuItem>
-                        <MenuItem value={"lighter"}>Lighter</MenuItem>
-                    </Select>
-                </div>
+                {displayTone && (
+                    <div className="btn-groups">
+                        <Select
+                            size='big'
+                            sx={{ width: 200, height: 35, marginLeft: 5 }}
+                            value={tone}
+                            onChange={handleTone}
+                        >
+                            <MenuItem value={"darker"}>Darker</MenuItem>
+                            <MenuItem value={"dark"}>Dark</MenuItem>
+                            <MenuItem value={"normal"}>Normal</MenuItem>
+                            <MenuItem value={"light"}>Light</MenuItem>
+                            <MenuItem value={"lighter"}>Lighter</MenuItem>
+                        </Select>
+                    </div>
+                )}
             </div>
             <div className="mode-btns">
                 <Select
