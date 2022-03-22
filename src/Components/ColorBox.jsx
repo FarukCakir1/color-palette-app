@@ -3,12 +3,43 @@ import "../CSS/ColorBox.css"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import chroma from "chroma-js"
 import { Link } from "react-router-dom"
+import { withStyles } from "@mui/styles"
 
-function ColorBox({ colorValue, name, moreURL, displayMore }) {
+
+const styles = {
+    valueMsg : {
+      color: props => chroma(props.colorValue).luminance() >= 0.7 ? "black" : "white",
+      fontSize: "1.5rem",
+      fontWeight: "200"
+    },
+    copyText: {
+      color: props => chroma(props.colorValue).luminance() >= 0.7 ? "black" : "white",
+    },
+    colorName: {
+      color: props => chroma(props.colorValue).luminance() <= 0.08 ? "white" : "black"
+    },
+    moreBtn: {
+      background: "rgba(255, 255, 255, 0.3)",
+      position: "absolute",
+      border: "none",
+      right: "0",
+      bottom: "0",
+      fontSize: ".7rem",
+      width: "50px",
+      height: "25px",
+      lineHeight: "25px",
+      textAlign: "center",
+      textDecoration: "none",
+      color: props => chroma(props.colorValue).luminance() >= 0.7 ? "black" : "white",
+    }
+
+}
+
+function ColorBox({ classes ,colorValue, name, moreURL, displayMore }) {
   const [coppied, setCoppied] = useState(false)
 
-  const checkDarkness = chroma(colorValue).luminance() <= 0.08;
-  const checkLightness = chroma(colorValue).luminance() >= 0.6;
+  const {valueMsg, copyText, colorName, moreBtn} = classes;
+
   return (
     <CopyToClipboard text={colorValue} onCopy={() => {
       setCoppied(true)
@@ -17,18 +48,18 @@ function ColorBox({ colorValue, name, moreURL, displayMore }) {
       <div style={{ background: colorValue }} className='ColorBox'>
         <div style={{ background: colorValue }} className={`overlay ${coppied && "display"}`} />
         <div className={`message ${coppied && "display"}`}>
-          <h1 className={`${checkDarkness && "light-text" } ${checkLightness && "dark-text"}`}>Copied!</h1>
-          <p className={`${checkDarkness && "light-text" } ${checkLightness && "dark-text"}`}>{colorValue}</p>
+          <h1 className={copyText}>Copied!</h1>
+          <p className={valueMsg}>{colorValue}</p>
         </div>
         <div className="container">
           <div className="content">
-            <span className={checkDarkness && "light-text"}>{name}</span>
+            <span className={colorName}>{name}</span>
           </div>
           <button className='copy-btn'>COPY</button>
         </div>
         {displayMore && (
           <Link to={moreURL} onClick={e => e.stopPropagation()}>
-            <span className={`more-btn ${checkLightness && "dark-text"}`}>MORE</span>
+            <span className={moreBtn}>MORE</span>
           </Link>
         )}
 
@@ -38,4 +69,7 @@ function ColorBox({ colorValue, name, moreURL, displayMore }) {
   )
 }
 
-export default ColorBox
+export default withStyles(styles) (ColorBox)
+
+
+

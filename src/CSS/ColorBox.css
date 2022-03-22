@@ -123,9 +123,10 @@
     margin:0;
     width: 100%;
     background: rgba(255, 255, 255, 0.2);
+    color: white
 }
 
-.message p{
+/* .message p{
     font-weight: 100;
     font-size: 2rem;
     color:rgba(255, 255, 255, 0.5)
@@ -133,7 +134,7 @@
 
 .message p.dark-text{
     color:black;
-}
+} */
 
 .SingleColorPage{
     width: 100vw;
