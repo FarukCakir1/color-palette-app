@@ -14,13 +14,18 @@ export default {
     nav: {
         display: "flex",
         justifyContent: "space-between",
-        color: "white"
+        color: "white",
+        alignItems: "center",
+        "& a": {
+            color: "white",
+            fontWeight: "900",
+        }
     },
     palette: {
         boxSizing: "border-box",
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(3, 30%)",
-        gridGap: "7% 4%"
+        gridGap: "7% 5%"
     }
 }
