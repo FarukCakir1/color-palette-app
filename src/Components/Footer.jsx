@@ -1,10 +1,11 @@
 import React from 'react'
-import "../CSS/Footer.css"
+import { withStyles } from '@mui/styles'
+import styles from "../styles/FooterStyles"
 
-function Footer({ palette }) {
+function Footer({ palette, classes }) {
   return (
-    <div id='footer'>
-        <footer id='footer'> 
+    <div className={classes.footer} >
+        <footer className={classes.footer}> 
           {palette.paletteName}
           <span>{palette.emoji}</span>
         </footer>
@@ -12,4 +13,4 @@ function Footer({ palette }) {
   )
 }
 
-export default Footer
+export default withStyles(styles) (Footer)

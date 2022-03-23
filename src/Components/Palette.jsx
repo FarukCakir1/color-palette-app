@@ -2,16 +2,21 @@ import React, { useState } from 'react'
 // Components
 import ColorBox from './ColorBox'
 import NavBar from './NavBar'
+import Footer from './Footer'
 // Style
-import "../CSS/Palette.css"
+import { withStyles } from '@mui/styles'
+import styles from "../styles/PaletteStyles"
 // Packages
 import { useParams } from "react-router-dom"
 // Helpers"
 import seedColors from '../seedColors'
 import { createPalette } from "../Helpers/ShadeGenerator";
-import Footer from './Footer'
 
-function Palette() {
+
+
+
+function Palette({classes}) {
+    const {Palette, boxes} = classes
     const { id } = useParams()
     const palette = createPalette(seedColors.find(palette => palette.id === id))
     const [tone, setTone] = useState("normal")
@@ -25,12 +30,12 @@ function Palette() {
         displayMore={true}
       />))
   return (
-    <div className='Palette'>
+    <div className={Palette}>
         <NavBar paletteName={palette.paletteName} emoji={palette.emoji} setTone={setTone} setMode={setMode} mode={mode} tone={tone} displayTone={true}/>
-        <div className="color-boxes">{ColorBoxes}</div>
+        <div className={boxes}>{ColorBoxes}</div>
         <Footer palette={palette} />
     </div>
   )
 }
 
-export default Palette
+export default withStyles(styles) (Palette)

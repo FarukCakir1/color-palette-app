@@ -6,9 +6,13 @@ import ShadeCollector from '../Helpers/ShadeCollector'
 import ColorBox from "../Components/ColorBox"
 import Navbar from "../Components/NavBar"
 import Footer from './Footer'
+import { withStyles } from "@mui/styles"
+import styles from "../styles/SingleColorPageStyles"
 
-function SingleColorPage() {
 
+
+function SingleColorPage({classes}) {
+  const {singlePalette, boxes, goBackBtn} = classes;
   const [mode, setMode] = useState("rgb")
   const { paletteId, colorId } = useParams()
   const palette = createPalette(seedColors.find(palette => palette.id === paletteId))
@@ -21,12 +25,12 @@ function SingleColorPage() {
     displayMore={false}
   />))
   return (
-    <div className='SingleColorPalette Palette'>
+    <div className={singlePalette}>
       <Navbar mode={mode} setMode={setMode} displayTone={false} />
-      <div className="color-boxes">
+      <div className={boxes}>
         {colorBoxes}
         <Link style={{textDecoration: "none"}} to={`/palette/${paletteId}`}>
-        <div className="go-back-btn">
+        <div className={goBackBtn}>
           <h1>Go Back</h1>
         </div>
       </Link>
@@ -38,4 +42,4 @@ function SingleColorPage() {
   )
 }
 
-export default SingleColorPage
+export default withStyles(styles) (SingleColorPage)

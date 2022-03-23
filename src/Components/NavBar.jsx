@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
-import "../CSS/NavBar.css"
 import { Select, MenuItem, Snackbar, Alert } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { withStyles } from "@mui/styles"
+import styles from "../styles/NavBarStyle"
+ 
 
 
 
+function NavBar({setTone, setMode, mode, tone, displayTone, classes }) {
 
-function NavBar({ paletteName, emoji, setTone, setMode, mode, tone, displayTone }) {
-
+    const {NavBar, leftSide, title, btnGroups, modeBtns} = classes;
     const [open, setOpen] = useState(false);
-
     const handleTone = (e) => {
         setTone(e.target.value)
     }
@@ -27,13 +28,13 @@ function NavBar({ paletteName, emoji, setTone, setMode, mode, tone, displayTone 
     }
 
     return (
-        <div className='NavBar'>
-            <div className="left-side">
-                <Link className='title' to="/">
+        <div className={NavBar}>
+            <div className={leftSide}>
+                <Link className={title} to="/">
                     <h3>Color Palettes</h3>
                 </Link>
                 {displayTone && (
-                    <div className="btn-groups">
+                    <div className={btnGroups}>
                         <Select
                             size='big'
                             sx={{ width: 200, height: 35, marginLeft: 5 }}
@@ -49,7 +50,7 @@ function NavBar({ paletteName, emoji, setTone, setMode, mode, tone, displayTone 
                     </div>
                 )}
             </div>
-            <div className="mode-btns">
+            <div className={modeBtns}>
                 <Select
                     sx={{ width: 200, height: 35 }}
                     size="small"
@@ -70,4 +71,4 @@ function NavBar({ paletteName, emoji, setTone, setMode, mode, tone, displayTone 
     )
 }
 
-export default NavBar
+export default withStyles(styles) (NavBar)
