@@ -3,10 +3,10 @@ export default {
     colorBox: {
       width: "20%",
       height: props => props.displayMore ? "25%" : "70%",
-      margin: "0 auto",
+      // margin: "0 auto",
       display: "inline-block",
       position: "relative",
-      marginBottom: "-3.9px",
+      marginBottom: "-6px",
       textTransform: "uppercase",
       "&:hover button": {
         opacity: "1"

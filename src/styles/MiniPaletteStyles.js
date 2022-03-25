@@ -31,7 +31,7 @@ export default {
         height: "25%",
         display: "inline-block",
         positon: "relative",
-        marginTop: "-4px"
+        marginBottom: "-7px"
     }
 
 }
