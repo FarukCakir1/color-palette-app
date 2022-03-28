@@ -231,6 +231,7 @@ function NewPaletteForm({ addNewPalette, palettes }) {
 
         {newColors.map(color =>
         (<DraggableColorBox
+          key={color.name}
           color={color.color}
           name={color.name.toLocaleLowerCase()}
           setNewColors={setNewColors}

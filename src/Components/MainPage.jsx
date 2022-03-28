@@ -21,7 +21,7 @@ function MainPage({ classes, palettes }) {
                 </div>
                 <div className={palette}>
                     {palettes.map(palette => (
-                        <MiniPalette {...palette} goToPalette={() => {goToPalette(palette.id)}}/>
+                        <MiniPalette key={palette.id} {...palette} goToPalette={() => {goToPalette(palette.id)}}/>
                     ))}
                 </div>
             </div>
