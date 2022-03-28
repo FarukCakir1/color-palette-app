@@ -1,61 +1,61 @@
 import React from 'react'
-import { withStyles } from "@mui/styles"
+import DeleteIcon from '@mui/icons-material/Delete';
+import { withStyles } from "@mui/styles";
+import { SortableElement } from 'react-sortable-hoc';
 
 const styles = {
-    root: {
-      width: "20%",
-      height: "25%", 
-      margin: "0 auto",
-      display: "inline-block",
-      position: "relative",
-      marginBottom: "-5px",
-      textTransform: "uppercase",
-    },
-    colorName: {
-      position: "absolute",
-      bottom: "0",
-      left: "0",
+  root: {
+    width: "20%",
+    height: "25%",
+    margin: "0 auto",
+    display: "inline-block",
+    position: "relative",
+    marginBottom: "-5px",
+    textTransform: "uppercase",
+    "&:hover svg": {
       color: "white",
-      paddingLeft: "10px",
-      letterSpacing: "2px",
-      fontSize: ".8rem",
-      fontWeight: "100"
+      transform: "scale(1.5)"
     },
-    deleteBtn: {
-      position: "absolute",
-      bottom: "2px",
-      right: "0",
-      background: "none",
-      border: "none",
-      padingRight: "10px",
-      color:"white",
-      fontSize:"1rem",
-      transition: "transform .5s ease-in-out",
-      "&:hover":{
-        transform: "scale(1.1)",
-      }
+
+    "& svg": {
+      transition: "all 0.3s ease-in-out",
+      fontSize: "1rem"
     }
+  },
+  content: {
+    position: "absolute",
+    width: "100%",
+    color: "white",
+    left: "0",
+    bottom: "0",
+    padding: "0.5rem",
+    letterSpacing: "1px",
+    fontSize: "0.8rem",
+    display: "flex",
+    justifyContent: "space-between"
+  },
+  
 
 }
 
-function DraggableColorBox({ classes, color, name, setNewColors, newColors }) {
-    const { root, colorName, deleteBtn } = classes
+const DraggableColorBox = SortableElement(({ classes, color, name, setNewColors, newColors }) => {
+  const { root, colorName, deleteIcon, content } = classes
 
-    const handleDelete = () => {
-      const filteredArr = newColors.filter(color => name !== color.name)
-      setNewColors(filteredArr);
-    }
+  const handleDelete = (e) => {
+    e.stopPropagation()
+    const filteredArr = newColors.filter(color => name !== color.name)
+    setNewColors(filteredArr);
+
+  }
 
   return (
-    <div style={{backgroundColor: color}} className={root}>
-        <div className={colorName}>
-          {name}
-        </div>
-        <div className={deleteBtn}>
-          <button onClick={handleDelete} className={deleteBtn}><i className="fa-solid fa-trash"></i></button>
-        </div>
+    <div style={{ backgroundColor: color }} className={root}>
+      <div className={content}>
+        <span>{name}</span>
+        <DeleteIcon onClick={handleDelete}/>
+      </div>
     </div>
   )
-}
+})
 
-export default withStyles(styles) (DraggableColorBox)
+export default withStyles(styles)(DraggableColorBox)
