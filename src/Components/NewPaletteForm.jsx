@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import clsx from "clsx"
+import { useNavigate } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
@@ -30,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
     }),
-    background: "black"
+    background: "white",
+    color: "black"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -83,13 +84,15 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function NewPaletteForm() {
+function NewPaletteForm({ addNewPalette, palettes }) {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  // const theme = useTheme();
+  const [open, setOpen] = useState(true);
   const [currentColor, setCurrentColor] = useState("#505FCA");
   const [newColors, setNewColors] = useState([])
   const [colorName, setColorName] = useState("");
+  const [newPaletteName, setNewPaletteName] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
    
@@ -99,9 +102,14 @@ function NewPaletteForm() {
     ValidatorForm.addValidationRule('sameColor', value => {
       return newColors.every(({color}) => color !== currentColor)      
     })
+    ValidatorForm.addValidationRule('paletteName', value => {
+      return palettes.every(({paletteName}) => paletteName !== value)      
+    })
   
 
   })
+
+  // ------------------- FUNCTİONS START -------------------
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -121,6 +129,25 @@ function NewPaletteForm() {
     setNewColors([...newColors, color])
     setColorName("")
   }
+
+  const handleSave = () => {
+    let newName = newPaletteName
+    const newPalette = {
+      paletteName: newName,
+      id: newName.toLowerCase().replace(/ /g, "-"),
+      emoji: "test",
+      colors: newColors
+    }
+
+    addNewPalette(newPalette)
+    navigate("/")
+  }
+
+  const handleSaveForm = (e) => {
+    setNewPaletteName(e.target.value)
+  }
+
+  // ------------------- FUNCTİONS END -------------------
 
   return (
     <div className={classes.root}>
@@ -142,8 +169,21 @@ function NewPaletteForm() {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Persistent drawer
+            Create New Palette
           </Typography>
+          <ValidatorForm onSubmit={handleSave}>
+            <TextValidator 
+              onChange={handleSaveForm}
+              value={newPaletteName}
+              size="small"
+              placeholder='Enter a name'
+              validators={["required", "paletteName"]}
+              errorMessages={["Enter Palette Name", "Name already taken"]}
+            />
+            <Button variant='contained' color='primary' type='submit'>Save Palette</Button>
+          </ValidatorForm>
+          
+          <Button variant='contained' color='secondary' onClick={() => navigate("/")}>Go Back</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -193,6 +233,8 @@ function NewPaletteForm() {
         (<DraggableColorBox
           color={color.color}
           name={color.name.toLocaleLowerCase()}
+          setNewColors={setNewColors}
+          newColors={newColors}
         />))}
 
       </main>

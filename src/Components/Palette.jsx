@@ -9,16 +9,17 @@ import styles from "../styles/PaletteStyles"
 // Packages
 import { useParams } from "react-router-dom"
 // Helpers"
-import seedColors from '../seedColors'
+// import seedColors from '../seedColors'
 import { createPalette } from "../Helpers/ShadeGenerator";
 
 
 
 
-function Palette({classes}) {
+function Palette({classes, palettes}) {
     const {Palette, boxes} = classes
     const { id } = useParams()
-    const palette = createPalette(seedColors.find(palette => palette.id === id))
+    // const [palettes, setPalettes] = useState(seedColors)
+    const palette = createPalette(palettes.find(palette => palette.id === id))
     const [tone, setTone] = useState("normal")
     const [mode, setMode] = useState("rgb")
     const ColorBoxes = palette.colors[tone].map(color => 

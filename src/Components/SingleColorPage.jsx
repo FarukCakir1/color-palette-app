@@ -11,11 +11,11 @@ import styles from "../styles/SingleColorPageStyles"
 
 
 
-function SingleColorPage({classes}) {
+function SingleColorPage({classes, palettes}) {
   const {singlePalette, boxes, goBackBtn} = classes;
   const [mode, setMode] = useState("rgb")
   const { paletteId, colorId } = useParams()
-  const palette = createPalette(seedColors.find(palette => palette.id === paletteId))
+  const palette = createPalette(palettes.find(palette => palette.id === paletteId))
   const shades = ShadeCollector(palette, colorId)
   const colorBoxes = shades.map(color =>
   (<ColorBox
