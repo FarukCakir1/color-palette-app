@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import clsx from "clsx"
 import { useNavigate } from 'react-router-dom';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
@@ -14,7 +14,8 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
 import { ChromePicker } from "react-color"
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import DraggableColorBox from './DraggableColorBox';
+import DraggableBoxList from './DraggableBoxList';
+import { arrayMove } from 'react-sortable-hoc';
 
 
 
@@ -147,6 +148,17 @@ function NewPaletteForm({ addNewPalette, palettes }) {
     setNewPaletteName(e.target.value)
   }
 
+  const handleClear = () => {
+    setNewColors([])
+  }
+
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    // this.setState(({items}) => ({
+    //   items: arrayMove(items, oldIndex, newIndex),
+    // }));
+    setNewColors(arrayMove(newColors, oldIndex, newIndex))
+  };
+
   // ------------------- FUNCTİONS END -------------------
 
   return (
@@ -203,7 +215,7 @@ function NewPaletteForm({ addNewPalette, palettes }) {
         <Divider />
         <Typography variant='h4'>Create Your Palette</Typography>
         <div className="btns">
-          <Button variant="contained" color="secondary">Clear Palette</Button>
+          <Button variant="contained" color="secondary" onClick={handleClear}>Clear Palette</Button>
           <Button variant="contained" color="primary">Random Color</Button>
         </div>
         <ChromePicker color={currentColor} onChangeComplete={newColor => setCurrentColor(newColor.hex)} />
@@ -228,15 +240,8 @@ function NewPaletteForm({ addNewPalette, palettes }) {
         })}
       >
         <div className={classes.drawerHeader} />
-
-        {newColors.map(color =>
-        (<DraggableColorBox
-          key={color.name}
-          color={color.color}
-          name={color.name.toLocaleLowerCase()}
-          setNewColors={setNewColors}
-          newColors={newColors}
-        />))}
+        <DraggableBoxList newColors={newColors} setNewColors={setNewColors} axis="xy" onSortEnd={onSortEnd}/>
+        
 
       </main>
     </div>
