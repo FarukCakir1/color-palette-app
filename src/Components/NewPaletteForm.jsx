@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import clsx from "clsx"
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -8,11 +8,10 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import Button from '@material-ui/core/Button';
-import { ChromePicker } from "react-color"
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import DraggableBoxList from './DraggableBoxList';
 import { arrayMove } from 'react-sortable-hoc';
 import CreatePaletteNav from './CreatePaletteNav';
+import ColorPicker from './ColorPicker';
 
 
 const drawerWidth = 350;
@@ -89,17 +88,7 @@ function NewPaletteForm({ addNewPalette, palettes }) {
   const [newColors, setNewColors] = useState([])
   const [colorName, setColorName] = useState("");
   const navigate = useNavigate();
-
-  useEffect(() => {
-   
-    ValidatorForm.addValidationRule('isColorNameUnique', value => {
-      return newColors.every(({name}) => name.toLocaleLowerCase() !== value.toLocaleLowerCase())      
-    })
-    ValidatorForm.addValidationRule('sameColor', value => {
-      return newColors.every(({color}) => color !== currentColor)      
-    })
-
-  })
+  const isPaletteFull = newColors.length === 20
 
   // ------------------- FUNCTİONS START -------------------
 
@@ -111,12 +100,7 @@ function NewPaletteForm({ addNewPalette, palettes }) {
     setOpen(false);
   };
 
-
-  const handleChange = (e) => {
-    setColorName(e.target.value);
-  }
-
-  const handleSubmit = () => {
+  const handleSubmit = (colorName, currentColor) => {
     let color = {name: colorName, color: currentColor}
     setNewColors([...newColors, color])
     setColorName("")
@@ -154,7 +138,7 @@ function NewPaletteForm({ addNewPalette, palettes }) {
 
   // ------------------- FUNCTİONS END -------------------
 
-  return (
+  return ( 
     <div className={classes.root}>
       <CreatePaletteNav
         classes={classes} 
@@ -163,7 +147,7 @@ function NewPaletteForm({ addNewPalette, palettes }) {
         handleSave={handleSave}
         palettes={palettes}
       />
-      
+
       <Drawer
         className={classes.drawer}
         variant="persistent"
@@ -184,20 +168,14 @@ function NewPaletteForm({ addNewPalette, palettes }) {
           <Button variant="contained" color="secondary" onClick={handleClear}>Clear Palette</Button>
           <Button variant="contained" color="primary" onClick={randomColor}>Random Color</Button>
         </div>
-        <ChromePicker color={currentColor} onChangeComplete={newColor => setCurrentColor(newColor.hex)} />
-        <ValidatorForm
-          onSubmit={handleSubmit}
-        >
-          <TextValidator
-            onChange={handleChange}
-            type="text"
-            value={colorName}
-            validators={['isColorNameUnique', "sameColor",  "required"]}
-            errorMessages={["Name already taken", "This Color Already Added", "This field is required"]}
-          />
-          <Button variant='contained' color="primary" type='submit' style={{ backgroundColor: currentColor }}>Add Color</Button>
-        </ValidatorForm>
-        
+        <ColorPicker 
+          isPaletteFull={isPaletteFull} 
+          handleSubmit={handleSubmit}
+          currentColor={currentColor}
+          setCurrentColor={setCurrentColor}
+          newColors={newColors}
+        />
+       
 
       </Drawer>
       <main
