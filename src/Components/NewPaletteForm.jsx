@@ -26,7 +26,9 @@ const useStyles = makeStyles((theme) => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     background: "white",
-    color: "black"
+    color: "black",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -45,6 +47,9 @@ const useStyles = makeStyles((theme) => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center"
 
   },
   drawerPaper: {
@@ -76,6 +81,25 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  navBtns: {
+    display: "flex",
+    alignItems: "center",
+    "& button": {
+      height: "2rem"
+    }
+  },
+  container: {
+    width: "90%",
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    margin: "auto"
+  },
+  btns: {
+    // some styles 
+  }
 
 }));
 
@@ -86,7 +110,6 @@ function NewPaletteForm({ addNewPalette, palettes }) {
   const [open, setOpen] = useState(true);
   const [currentColor, setCurrentColor] = useState("#505FCA");
   const [newColors, setNewColors] = useState([])
-  const [colorName, setColorName] = useState("");
   const navigate = useNavigate();
   const isPaletteFull = newColors.length === 20
 
@@ -101,9 +124,8 @@ function NewPaletteForm({ addNewPalette, palettes }) {
   };
 
   const handleSubmit = (colorName, currentColor) => {
-    let color = {name: colorName, color: currentColor}
+    let color = { name: colorName, color: currentColor }
     setNewColors([...newColors, color])
-    setColorName("")
   }
 
   const handleSave = (newPaletteName) => {
@@ -124,25 +146,25 @@ function NewPaletteForm({ addNewPalette, palettes }) {
 
   const randomColor = () => {
     let hexCode = "#";
-    for (let i = 0; i < 6; i++){
+    for (let i = 0; i < 6; i++) {
       const rand = Math.floor(Math.random() * codesArr.length)
       const randCode = codesArr[rand]
-      hexCode += randCode; 
+      hexCode += randCode;
     }
     setCurrentColor(hexCode)
   }
 
-  const onSortEnd = ({oldIndex, newIndex}) => {
+  const onSortEnd = ({ oldIndex, newIndex }) => {
     setNewColors(arrayMove(newColors, oldIndex, newIndex))
   };
 
   // ------------------- FUNCTİONS END -------------------
 
-  return ( 
+  return (
     <div className={classes.root}>
       <CreatePaletteNav
-        classes={classes} 
-        open={open} 
+        classes={classes}
+        open={open}
         handleDrawerOpen={handleDrawerOpen}
         handleSave={handleSave}
         palettes={palettes}
@@ -163,20 +185,20 @@ function NewPaletteForm({ addNewPalette, palettes }) {
           </IconButton>
         </div>
         <Divider />
-        <Typography variant='h4'>Create Your Palette</Typography>
-        <div className="btns">
-          <Button variant="contained" color="secondary" onClick={handleClear}>Clear Palette</Button>
-          <Button variant="contained" color="primary" onClick={randomColor}>Random Color</Button>
+        <div className={classes.container}>
+          <Typography variant='h4'>Create Your Palette</Typography>
+          <div className={classes.btns}>
+            <Button variant="contained" color="secondary" onClick={handleClear}>Clear Palette</Button>
+            <Button variant="contained" color="primary" onClick={randomColor}>Random Color</Button>
+          </div>
+          <ColorPicker
+            isPaletteFull={isPaletteFull}
+            handleSubmit={handleSubmit}
+            currentColor={currentColor}
+            setCurrentColor={setCurrentColor}
+            newColors={newColors}
+          />
         </div>
-        <ColorPicker 
-          isPaletteFull={isPaletteFull} 
-          handleSubmit={handleSubmit}
-          currentColor={currentColor}
-          setCurrentColor={setCurrentColor}
-          newColors={newColors}
-        />
-       
-
       </Drawer>
       <main
         className={clsx(classes.content, {
@@ -184,8 +206,8 @@ function NewPaletteForm({ addNewPalette, palettes }) {
         })}
       >
         <div className={classes.drawerHeader} />
-        <DraggableBoxList newColors={newColors} setNewColors={setNewColors} axis="xy" onSortEnd={onSortEnd}/>
-        
+        <DraggableBoxList newColors={newColors} setNewColors={setNewColors} axis="xy" onSortEnd={onSortEnd} />
+
 
       </main>
     </div>

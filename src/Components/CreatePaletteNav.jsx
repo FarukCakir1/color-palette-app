@@ -10,9 +10,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
-function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSave}) {
+
+function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSave }) {
     const [newPaletteName, setNewPaletteName] = useState("");
-    const navigate = useNavigate();
+    const navigate = useNavigate()
+
 
     useEffect(() => {
         ValidatorForm.addValidationRule('paletteName', value => {
@@ -20,15 +22,15 @@ function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSav
         })
 
     })
-    
-    
+
+
     const handleSaveForm = (e) => {
         setNewPaletteName(e.target.value)
     }
-    
+
 
     return (
-        <div>
+        <div className={classes.root}>
             <CssBaseline />
             <AppBar
                 position="fixed"
@@ -49,6 +51,9 @@ function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSav
                     <Typography variant="h6" noWrap>
                         Create New Palette
                     </Typography>
+
+                </Toolbar>
+                <div className={classes.navBtns}>
                     <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
                         <TextValidator
                             onChange={handleSaveForm}
@@ -62,10 +67,11 @@ function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSav
                     </ValidatorForm>
 
                     <Button variant='contained' color='secondary' onClick={() => navigate("/")}>Go Back</Button>
-                </Toolbar>
+                </div>
+
             </AppBar>
         </div>
     )
 }
 
-export default CreatePaletteNav
+export default CreatePaletteNav;

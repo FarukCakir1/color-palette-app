@@ -1,12 +1,31 @@
 import { useState, useEffect } from 'react'
 import clsx from "clsx"
-import { makeStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { ChromePicker } from "react-color"
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 
+const styles = {
+    root: {
+        width: "90%",
+        marginTop: "2rem"
+    },
+    picker: {
+        width: "100% !important"
+    },
+    button: {
+        width: "100%",
+        padding: "1rem 0",
+        fontSize: "1.5rem"
+    },
+    textField: {
+        width: "100%",
+        margin: ".5rem 0 !important",
+    }
 
-function ColorPicker( { isPaletteFull, handleSubmit, currentColor, setCurrentColor, newColors } ) {
+}
+
+function ColorPicker( { classes, isPaletteFull, handleSubmit, currentColor, setCurrentColor, newColors } ) {
     const [colorName, setColorName] = useState("");
 
     useEffect(() => {
@@ -26,12 +45,20 @@ function ColorPicker( { isPaletteFull, handleSubmit, currentColor, setCurrentCol
 
 
     return (
-        <div>
-            <ChromePicker color={currentColor} onChangeComplete={newColor => setCurrentColor(newColor.hex)} />
+        <div className={classes.root}>
+            <ChromePicker 
+                className={classes.picker}
+                color={currentColor} 
+                onChangeComplete={newColor => setCurrentColor(newColor.hex)} 
+            />
             <ValidatorForm
-                onSubmit={() => handleSubmit(colorName, currentColor)}
+                onSubmit={() => {
+                    handleSubmit(colorName, currentColor)
+                    setColorName("")
+                }}
             >
                 <TextValidator
+                    className={classes.textField}
                     onChange={handleChange}
                     type="text"
                     value={colorName}
@@ -44,6 +71,7 @@ function ColorPicker( { isPaletteFull, handleSubmit, currentColor, setCurrentCol
                     type='submit'
                     style={{ backgroundColor: isPaletteFull ? "grey" : currentColor }}
                     disabled={isPaletteFull}
+                    className={classes.button}
                 >{isPaletteFull ? "Palette Full" : "Add Color"}
                 </Button>
             </ValidatorForm>
@@ -51,4 +79,4 @@ function ColorPicker( { isPaletteFull, handleSubmit, currentColor, setCurrentCol
     )
 }
 
-export default ColorPicker
+export default withStyles(styles) (ColorPicker);
