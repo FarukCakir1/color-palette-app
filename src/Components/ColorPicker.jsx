@@ -16,11 +16,11 @@ const styles = {
     button: {
         width: "100%",
         padding: "1rem 0",
-        fontSize: "1.5rem"
+        fontSize: "1.5rem",
+        marginTop: "1rem"
     },
     textField: {
         width: "100%",
-        margin: ".5rem 0 !important",
     }
 
 }
@@ -60,6 +60,7 @@ function ColorPicker( { classes, isPaletteFull, handleSubmit, currentColor, setC
                 <TextValidator
                     className={classes.textField}
                     onChange={handleChange}
+                    margin="normal"
                     type="text"
                     value={colorName}
                     validators={['isColorNameUnique', "sameColor", "required"]}

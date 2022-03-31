@@ -98,7 +98,11 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto"
   },
   btns: {
-    // some styles 
+    width: "90%"
+  },
+  btn: {
+    width: "50%",
+    fontSize: ".7rem"
   }
 
 }));
@@ -186,10 +190,10 @@ function NewPaletteForm({ addNewPalette, palettes }) {
         </div>
         <Divider />
         <div className={classes.container}>
-          <Typography variant='h4'>Create Your Palette</Typography>
+          <Typography variant='h5' gutterBottom>Create Your Palette</Typography>
           <div className={classes.btns}>
-            <Button variant="contained" color="secondary" onClick={handleClear}>Clear Palette</Button>
-            <Button variant="contained" color="primary" onClick={randomColor}>Random Color</Button>
+            <Button variant="contained" className={classes.btn} color="secondary" onClick={handleClear}>Clear Palette</Button>
+            <Button variant="contained" className={classes.btn} color="primary" onClick={randomColor}>Random Color</Button>
           </div>
           <ColorPicker
             isPaletteFull={isPaletteFull}
