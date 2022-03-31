@@ -4,26 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { ChromePicker } from "react-color"
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import styles from "../styles/ColorPickerStyles"
 
-const styles = {
-    root: {
-        width: "90%",
-        marginTop: "2rem"
-    },
-    picker: {
-        width: "100% !important"
-    },
-    button: {
-        width: "100%",
-        padding: "1rem 0",
-        fontSize: "1.5rem",
-        marginTop: "1rem"
-    },
-    textField: {
-        width: "100%",
-    }
-
-}
 
 function ColorPicker( { classes, isPaletteFull, handleSubmit, currentColor, setCurrentColor, newColors } ) {
     const [colorName, setColorName] = useState("");
