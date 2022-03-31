@@ -3,7 +3,7 @@ import { withStyles } from "@mui/styles"
 import styles from "../styles/MiniPaletteStyles"
 
 
-function MiniPalette({ classes, paletteName, colors, goToPalette }) {
+function MiniPalette({ classes, paletteName, colors, goToPalette, emoji }) {
 
     const { root, boxes, title, miniBoxes } = classes
 
@@ -15,7 +15,8 @@ function MiniPalette({ classes, paletteName, colors, goToPalette }) {
                 ))}
             </div>
             <h5 className={title}>
-                {paletteName}
+                <span>{paletteName}</span>
+                <span>{emoji}</span>
             </h5>
         </div>
     )

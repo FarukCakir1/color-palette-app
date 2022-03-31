@@ -15,7 +15,6 @@ function App() {
  
   const addNewPalette = (newPalette) => {
     setPalettes([...palettes, newPalette])
-    console.log(palettes);
   }
   return (
     <Routes>

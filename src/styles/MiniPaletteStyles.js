@@ -25,7 +25,7 @@ export default {
         height: "20%",
         fontSize: ".7rem",
         display: "flex",
-        justifyContent: "start",
+        justifyContent: "space-between",
         margin: ".3rem 0 0 0"
     },
     miniBoxes: {
@@ -34,6 +34,7 @@ export default {
         display: "inline-block",
         positon: "relative",
         marginBottom: "-6px"
-    }
+    },
+
 
 }

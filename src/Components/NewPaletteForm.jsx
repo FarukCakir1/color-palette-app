@@ -37,6 +37,7 @@ const useStyles = makeStyles((theme) => ({
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
     }),
+    justifyContent: "space-between"
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -86,7 +87,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
     "& button": {
       height: "2rem"
-    }
+    },
+    marginRight: "1rem"
+  },
+  navBtn: {
+    margin: "0 0.3rem"
   },
   container: {
     width: "90%",
@@ -98,7 +103,8 @@ const useStyles = makeStyles((theme) => ({
     margin: "auto"
   },
   btns: {
-    width: "90%"
+    width: "90%",
+    marginRight: "1rem"
   },
   btn: {
     width: "50%",
@@ -132,11 +138,11 @@ function NewPaletteForm({ addNewPalette, palettes }) {
     setNewColors([...newColors, color])
   }
 
-  const handleSave = (newPaletteName) => {
+  const handleSave = (newPaletteName, emoji) => {
     const newPalette = {
       paletteName: newPaletteName,
       id: newPaletteName.toLowerCase().replace(/ /g, "-"),
-      emoji: "test",
+      emoji: emoji,
       colors: newColors
     }
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import clsx from "clsx"
 import { useNavigate } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -8,27 +8,20 @@ import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
-import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import DialogForm from './DialogForm';
 
 
 function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSave }) {
-    // const [newPaletteName, setNewPaletteName] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const [ showDialog, setShowDialog] = useState(false);
 
+    const displayDialog = () => {
+        setShowDialog(true)
+    }
 
-    // useEffect(() => {
-    //     ValidatorForm.addValidationRule('paletteName', value => {
-    //         return palettes.every(({ paletteName }) => paletteName !== value)
-    //     })
-
-    // })
-
-
-    // const handleSaveForm = (e) => {
-    //     setNewPaletteName(e.target.value)
-    // }
-
+    const hideDialog = () => {
+        setShowDialog(false)
+    }
 
     return (
         <div className={classes.root}>
@@ -55,23 +48,13 @@ function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSav
 
                 </Toolbar>
                 <div className={classes.navBtns}>
-                    {/* <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
-                        <TextValidator
-                            onChange={handleSaveForm}
-                            value={newPaletteName}
-                            size="small"
-                            placeholder='Enter a name'
-                            validators={["required", "paletteName"]}
-                            errorMessages={["Enter Palette Name", "Name already taken"]}
-                        />
-                        <Button variant='contained' color='primary' type='submit'>Save Palette</Button>
-                    </ValidatorForm> */}
-                    <DialogForm handleSave={handleSave} palettes={palettes} />
-
-                    <Button variant='contained' color='secondary' onClick={() => navigate("/")}>Go Back</Button>
+                    <Button className={classes.navBtn} variant='contained' color='secondary' onClick={() => navigate("/")}>Go Back</Button>
+                    <Button className={classes.navBtn} variant="contained" color="primary" onClick={displayDialog}>
+                        Save
+                    </Button>
                 </div>
-
             </AppBar>
+            {showDialog && <DialogForm handleSave={handleSave} palettes={palettes} hideDialog={hideDialog}/>}
         </div>
     )
 }
