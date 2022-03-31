@@ -9,24 +9,25 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Button from '@material-ui/core/Button';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+import DialogForm from './DialogForm';
 
 
 function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSave }) {
-    const [newPaletteName, setNewPaletteName] = useState("");
+    // const [newPaletteName, setNewPaletteName] = useState("");
     const navigate = useNavigate()
 
 
-    useEffect(() => {
-        ValidatorForm.addValidationRule('paletteName', value => {
-            return palettes.every(({ paletteName }) => paletteName !== value)
-        })
+    // useEffect(() => {
+    //     ValidatorForm.addValidationRule('paletteName', value => {
+    //         return palettes.every(({ paletteName }) => paletteName !== value)
+    //     })
 
-    })
+    // })
 
 
-    const handleSaveForm = (e) => {
-        setNewPaletteName(e.target.value)
-    }
+    // const handleSaveForm = (e) => {
+    //     setNewPaletteName(e.target.value)
+    // }
 
 
     return (
@@ -54,7 +55,7 @@ function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSav
 
                 </Toolbar>
                 <div className={classes.navBtns}>
-                    <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
+                    {/* <ValidatorForm onSubmit={() => handleSave(newPaletteName)}>
                         <TextValidator
                             onChange={handleSaveForm}
                             value={newPaletteName}
@@ -64,7 +65,8 @@ function CreatePaletteNav({ classes, palettes, open, handleDrawerOpen, handleSav
                             errorMessages={["Enter Palette Name", "Name already taken"]}
                         />
                         <Button variant='contained' color='primary' type='submit'>Save Palette</Button>
-                    </ValidatorForm>
+                    </ValidatorForm> */}
+                    <DialogForm handleSave={handleSave} palettes={palettes} />
 
                     <Button variant='contained' color='secondary' onClick={() => navigate("/")}>Go Back</Button>
                 </div>
