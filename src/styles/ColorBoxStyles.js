@@ -1,4 +1,5 @@
 import chroma from "chroma-js";
+import SizeHelpers from "./SizeHelpers";
 export default {
     colorBox: {
       width: "20%",
@@ -10,6 +11,19 @@ export default {
       textTransform: "uppercase",
       "&:hover button": {
         opacity: "1"
+      },
+      [SizeHelpers.down("xl")]:{
+        width: "25%",
+        height: props => props.displayMore ? "20%" : "50%",
+      },
+      [SizeHelpers.down("md")]:{
+        width: "50%",
+        height: props => props.displayMore ? "10%" : "50%",
+      },
+      [SizeHelpers.down("sm")]: {
+        width: "100%",
+        height: props => props.displayMore ? "5%" : "15%",
+        marginBottom: "-4px"
       }
     },
     valueMsg : {
@@ -44,8 +58,8 @@ export default {
     },
     copyBtn: {
       color: props => chroma(props.colorValue).luminance() >= 0.7 ? "black" : "white",
-      width: "80px",
-      height: "30px",
+      width: "5rem",
+      height: "1.5rem",
       position: "absolute",
       top: "50%",
       left: "50%",
@@ -65,13 +79,13 @@ export default {
     height: "100%",
     zIndex: "0",
     transition: "transform 0.7s ease-in-out",
-    transform: "scale(0.1)"
+    transform: "scale(0.1)",
   },
   displayOverlay: {
     opacity: "1",
-    transform: "scale(10)",
+    transform: "scale(30)",
     zIndex: "10",
-    position: "absolute"
+    position: "absolute",
   },
   message: {
     position: "fixed",

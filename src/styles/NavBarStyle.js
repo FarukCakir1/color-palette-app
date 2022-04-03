@@ -1,6 +1,6 @@
 export default {
     NavBar: {
-        width: "100%",
+        width: "100vw",
         height: "5vh",
         display: "flex",
         justifyContent: "space-between",

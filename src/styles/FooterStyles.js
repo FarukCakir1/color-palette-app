@@ -1,6 +1,6 @@
 export default {
     footer: {
-        width: "100%",
+        width: "100vw",
         height: "5vh",
         display: "flex",
         justifyContent: "flex-end",
