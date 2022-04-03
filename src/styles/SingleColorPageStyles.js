@@ -1,3 +1,4 @@
+import SizeHelpers from "./SizeHelpers"
 export default {
     singlePalette : {
       height: "100vh",
@@ -16,5 +17,11 @@ export default {
       textDecoration: "none",
       color: "white",
       backgroundColor: "rgba(0, 0, 0, 0.253)",
+      [SizeHelpers.down("md")]: {
+        height: "25%"
+      },
+      [SizeHelpers.down("sm")]: {
+        height: "25%"
+      }
     }
   }

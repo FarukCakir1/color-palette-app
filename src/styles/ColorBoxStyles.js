@@ -13,15 +13,15 @@ export default {
         opacity: "1"
       },
       [SizeHelpers.down("xl")]:{
-        width: "25%",
-        height: props => props.displayMore ? "20%" : "50%",
+        width: props => props.displayMore ? "25%" :"20%",
+        height: props => props.displayMore ? "20%" : "70%",
       },
       [SizeHelpers.down("md")]:{
-        width: "50%",
-        height: props => props.displayMore ? "10%" : "50%",
+        width: props => props.displayMore ? "50%" :"100%",
+        height: props => props.displayMore ? "10%" : "15%",
       },
-      [SizeHelpers.down("sm")]: {
-        width: "100%",
+      [SizeHelpers.down("sm")]:{
+        width: props => props.displayMore ? "100%" :"100%",
         height: props => props.displayMore ? "5%" : "15%",
         marginBottom: "-4px"
       }

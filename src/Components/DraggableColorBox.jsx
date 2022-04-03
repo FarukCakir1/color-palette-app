@@ -1,5 +1,6 @@
 import React from 'react'
 import DeleteIcon from '@mui/icons-material/Delete';
+import SizeHelpers from "../styles/SizeHelpers"
 import { withStyles } from "@mui/styles";
 import { SortableElement } from 'react-sortable-hoc';
 
@@ -20,7 +21,24 @@ const styles = {
     "& svg": {
       transition: "all 0.3s ease-in-out",
       fontSize: "1rem"
+    },
+
+    [SizeHelpers.down("lg")]:{
+      width: "25%",
+      height: "20%",
+      marginBottom: "-6px"
+    },
+    [SizeHelpers.down("md")]:{
+      width: "50%",
+      height: "10%",
+      marginBottom: "-5.8px"
+    },
+    [SizeHelpers.down("sm")]:{
+      width: "100%",
+      height: "5%",
+      marginBottom: "-5.5px"
     }
+
   },
   content: {
     position: "absolute",

@@ -1,3 +1,4 @@
+import SizeHelpers from "./SizeHelpers"
 export default {
     NavBar: {
         width: "100vw",
@@ -24,14 +25,29 @@ export default {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        marginRight: "2rem",
+        [SizeHelpers.down("md")]:{
+            width: "50%",
+            fontSize: "1rem",
+            marginRight: ".3rem"
+        },
+        [SizeHelpers.down("sm")]:{
+            width: "50%",
+            fontSize: ".7rem",
+            display: props => props.displayTone && "none"
+        }
     },
    
     btnGroups: {
-        width: "50%"
+        width: "50%",
+        margin: "0 .3rem"
     },
 
     modeBtns: {
         margin: "0 1.5rem",
-        justifySelf: "felx-end"
+        justifySelf: "felx-end",
+        [SizeHelpers.down("sm")]:{
+            margin: "0 .5rem"
+        }
     }
 }

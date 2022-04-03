@@ -37,7 +37,7 @@ function NavBar({setTone, setMode, mode, tone, displayTone, classes }) {
                     <div className={btnGroups}>
                         <Select
                             size='big'
-                            sx={{ width: 200, height: 35, marginLeft: 5 }}
+                            sx={{ width: 200, height: 35}}
                             value={tone}
                             onChange={handleTone}
                         >
