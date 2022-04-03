@@ -1,14 +1,26 @@
 import React from 'react'
 import { withStyles } from "@mui/styles"
 import styles from "../styles/MiniPaletteStyles"
+import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function MiniPalette({ classes, paletteName, colors, goToPalette, emoji }) {
+function MiniPalette({ classes, paletteName, colors, goToPalette, emoji, id, deletePalette}) {
 
-    const { root, boxes, title, miniBoxes } = classes
+    const { root, boxes, title, miniBoxes, deleteIcon } = classes
+
+    const handleDelete = (e) => {
+        e.stopPropagation()
+        deletePalette(id)
+    }
 
     return (
         <div className={root} onClick={goToPalette}>
+            <DeleteIcon 
+                fontSize='small' 
+                className={deleteIcon} 
+                style={{transition: "all .5s ease-in-out"}} 
+                onClick={handleDelete}
+            />
             <div className={boxes}>
                 {colors.map(color => (
                     <div className={miniBoxes} style={{backgroundColor: color.color}} key={color.name}/>

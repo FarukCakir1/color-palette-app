@@ -4,7 +4,7 @@ import { withStyles } from "@mui/styles"
 import { useNavigate, Link } from "react-router-dom"
 import styles from "../styles/MainPageStyles"
 
-function MainPage({ classes, palettes }) {
+function MainPage({ classes, palettes, deletePalette}) {
 
     const { root, container, nav, palette } = classes;
     const navigate = useNavigate()
@@ -21,7 +21,12 @@ function MainPage({ classes, palettes }) {
                 </div>
                 <div className={palette}>
                     {palettes.map(palette => (
-                        <MiniPalette key={palette.id} {...palette} goToPalette={() => {goToPalette(palette.id)}}/>
+                        <MiniPalette 
+                            key={palette.id} 
+                            {...palette} 
+                            goToPalette={() => {goToPalette(palette.id)}} 
+                            deletePalette={deletePalette}
+                        />
                     ))}
                 </div>
             </div>

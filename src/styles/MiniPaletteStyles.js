@@ -9,8 +9,13 @@ export default {
         borderRadius: "5px",
         padding: ".5rem",
         height: "20vh",
-        marginTop: "1rem",
-        cursor: "pointer"
+        marginTop: ".5rem",
+        cursor: "pointer",
+        position: "relative",
+        overflow: "hidden",
+        "&:hover svg": {
+            opacity: "1"
+        }
     },
     boxes: {
         width: "100%",
@@ -35,6 +40,15 @@ export default {
         positon: "relative",
         marginBottom: "-6px"
     },
+    deleteIcon: {
+        position: "absolute",
+        top: "0",
+        right: "0",
+        background: "red",
+        padding: ".3rem",
+        color: "white",
+        opacity: "0",
+    }
 
 
 }
