@@ -20,7 +20,7 @@ export default {
     boxes: {
         width: "100%",
         height: "100%",
-        marginTop: ".7rem",
+        // marginTop: ".2rem",
         borderRadius: "5px",
         overflow:"hidden",
 
@@ -31,6 +31,7 @@ export default {
         fontSize: ".7rem",
         display: "flex",
         justifyContent: "space-between",
+        alignItems: "end",
         margin: ".3rem 0 0 0"
     },
     miniBoxes: {

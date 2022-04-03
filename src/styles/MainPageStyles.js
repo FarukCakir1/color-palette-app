@@ -1,3 +1,4 @@
+import SizeHelpers from "./SizeHelpers"
 export default {
     root: {
         background: "#3D7FE3",
@@ -11,6 +12,9 @@ export default {
         width: "50%",
         display: "flex",
         flexDirection: "column",
+        [SizeHelpers.down("lg")]: {
+            width: "80%"
+        }
     },
     nav: {
         height: "2rem",
@@ -28,6 +32,14 @@ export default {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(3, 30%)",
-        gridGap: "2% 5%"
+        gridGap: "1rem",
+        [SizeHelpers.down("md")]: {
+            gridTemplateColumns: "repeat(3, 33%)",
+        },
+        [SizeHelpers.down("sm")]: {
+            gridTemplateColumns: "repeat(2, 50%)",
+        }
+
+
     }
 }
