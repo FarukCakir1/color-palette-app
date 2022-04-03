@@ -32,12 +32,13 @@ export default {
         width: "100%",
         display: "grid",
         gridTemplateColumns: "repeat(3, 30%)",
-        gridGap: "1rem",
+        gridGap: "1rem 2.3rem",
         [SizeHelpers.down("md")]: {
             gridTemplateColumns: "repeat(3, 33%)",
         },
         [SizeHelpers.down("sm")]: {
             gridTemplateColumns: "repeat(2, 50%)",
+            gridGap: ".6rem .5rem",
         }
 
 
