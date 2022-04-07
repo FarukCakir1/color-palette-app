@@ -83,7 +83,7 @@ export default {
   },
   displayOverlay: {
     opacity: "1",
-    transform: "scale(30)",
+    transform: "scale(50)",
     zIndex: "10",
     position: "absolute",
   },

@@ -4,14 +4,15 @@ import styles from "../styles/MiniPaletteStyles"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function MiniPalette({ classes, paletteName, colors, goToPalette, emoji, id, deletePalette}) {
+function MiniPalette({ classes, paletteName, colors, goToPalette, emoji, id, openDialog}) {
 
     const { root, boxes, title, miniBoxes, deleteIcon } = classes
 
     const handleDelete = (e) => {
         e.stopPropagation()
-        deletePalette(id)
+        openDialog(id)
     }
+
 
     return (
         <div className={root} onClick={goToPalette}>
