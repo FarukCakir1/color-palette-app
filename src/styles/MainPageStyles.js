@@ -42,5 +42,9 @@ export default {
         }
 
 
+    },
+    start: {
+        margin: "auto",
+        marginTop: "10rem"
     }
 }

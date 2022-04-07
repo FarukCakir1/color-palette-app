@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { withStyles } from "@mui/styles"
 import styles from "../styles/MiniPaletteStyles"
 import DeleteIcon from '@mui/icons-material/Delete';
 
 
-function MiniPalette({ classes, paletteName, colors, goToPalette, emoji, id, openDialog}) {
+ function MiniPalette ({ classes, paletteName, colors, goToPalette, emoji, id, openDialog}) {
 
     const { root, boxes, title, miniBoxes, deleteIcon } = classes
 
@@ -12,8 +12,6 @@ function MiniPalette({ classes, paletteName, colors, goToPalette, emoji, id, ope
         e.stopPropagation()
         openDialog(id)
     }
-
-
     return (
         <div className={root} onClick={goToPalette}>
             <DeleteIcon 

@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import MiniPalette from './MiniPalette'
 import Dialog from '@mui/material/Dialog';
-import { Check, Close } from '@mui/icons-material';
+import Button from '@mui/material/Button';
+import { Check, Close, Add } from '@mui/icons-material';
 import Avatar from '@mui/material/Avatar';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -16,11 +17,11 @@ import styles from "../styles/MainPageStyles"
 
 function MainPage({ classes, palettes, deletePalette}) {
 
-    const { root, container, nav, palette } = classes;
-
+    const { root, container, nav, palette, start } = classes;
     const navigate = useNavigate()
     const [open, setOpen] = useState(false);
     const [deletingId, setDeletingId] = useState("")
+    const isThereAnyPalette = palettes.length === 0;
     const goToPalette = (id) => {
         navigate(`/palette/${id}`)
     }
@@ -40,6 +41,8 @@ function MainPage({ classes, palettes, deletePalette}) {
         setOpen(false)
         setDeletingId("")
     }
+
+    // console.log(palettes.length);
     return (
         <div className={root}>
             <div className={container}>
@@ -47,6 +50,11 @@ function MainPage({ classes, palettes, deletePalette}) {
                     <h4>Color Palette App</h4>
                     <Link to="/palette/new">Create Palette</Link>
                 </div>
+                {isThereAnyPalette && (
+                    <div className={start}>
+                        <Button color='success' variant='contained' onClick={() => navigate("/palette/new")}><Add /> Create a Palette</Button>
+                    </div>
+                )}
                 <div className={palette}>
                     {palettes.map(palette => (
                         <MiniPalette 
