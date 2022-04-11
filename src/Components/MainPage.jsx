@@ -42,7 +42,6 @@ function MainPage({ classes, palettes, deletePalette}) {
         setDeletingId("")
     }
 
-    // console.log(palettes.length);
     return (
         <div className={root}>
             <div className={container}>
